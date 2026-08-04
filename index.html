@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ================= BẢO MẬT (thêm mới) ================= -->
-    <!-- Content-Security-Policy: chỉ cho phép tải script/ảnh/font từ các nguồn tin cậy,
-         chặn script độc hại bị chèn vào (XSS), chặn nhúng trang vào iframe của web khác (clickjacking) -->
+    <!-- ================= BẢO MẬT ================= -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self';
         script-src 'self' https://cdn.tailwindcss.com 'unsafe-inline';
@@ -25,106 +23,236 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="font-sans text-gray-800 antialiased bg-gray-50">
+<body class="font-sans text-slate-700 antialiased bg-slate-50 selection:bg-orange-500 selection:text-white">
 
     <!-- Header -->
-    <header class="bg-blue-900 text-white shadow-lg fixed w-full z-50 top-0">
+    <header class="bg-blue-900 border-b border-orange-500/30 text-white shadow-xl fixed w-full z-50 top-0 backdrop-blur-md bg-blue-900/95">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-yellow-400">
-                <i class="fa-solid fa-helmet-safety"></i> SONG THỊNH
+            <a href="#" class="text-2xl font-black tracking-wider text-orange-400 hover:text-orange-300 transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-helmet-safety text-orange-500"></i> SONG THỊNH
             </a>
-            <nav class="hidden md:flex space-x-8 font-medium items-center">
-                <a href="#products" class="hover:text-yellow-400">Bảng Giá Hôm Nay</a>
-                <a href="#contact" class="bg-yellow-500 text-blue-900 px-6 py-2 rounded-full font-bold hover:bg-yellow-400">ĐẶT HÀNG NGAY</a>
+            <nav class="hidden md:flex space-x-8 font-semibold items-center">
+                <a href="#products" class="hover:text-orange-400 transition-colors">Bảng Giá Hôm Nay</a>
+                <a href="#contact" class="bg-orange-500 text-white px-6 py-2.5 rounded-full font-bold shadow-lg shadow-orange-500/30 hover:bg-orange-600 transition-all transform hover:-translate-y-0.5">ĐẶT HÀNG NGAY</a>
             </nav>
         </div>
     </header>
 
     <!-- Banner -->
-    <section class="pt-24 pb-12 flex items-center justify-center min-h-[60vh] bg-cover bg-center" style="background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1541888086925-0c13bb398e0c?w=1200');">
-        <div class="text-center text-white px-4">
-            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-yellow-400">VẬT LIỆU XÂY DỰNG SONG THỊNH</h1>
-            <p class="text-xl mb-8">Tổng kho phân phối sỉ & lẻ Cát, Đá, Xi Măng, Sắt Thép</p>
-            <a href="#contact" class="bg-blue-600 px-8 py-3 rounded-full text-lg font-bold hover:bg-blue-500">HOTLINE: 0938.331.789</a>
+    <section class="pt-24 pb-12 flex items-center justify-center min-h-[60vh] bg-cover bg-center relative" style="background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1541888086925-0c13bb398e0c?w=1200');">
+        <div class="absolute inset-0 bg-gradient-to-t from-blue-950/60 to-transparent"></div>
+        <div class="text-center text-white px-4 relative z-10 max-w-3xl mx-auto">
+            <span class="bg-orange-500/20 border border-orange-500/50 text-orange-400 text-sm font-bold px-4 py-1.5 rounded-full inline-block mb-4 tracking-wide uppercase">Chuyên nghiệp - Uy tín - Chất lượng</span>
+            <h1 class="text-4xl md:text-5xl font-black mb-4 text-white uppercase tracking-tight">VẬT LIỆU XÂY DỰNG <span class="text-orange-400">SONG THỊNH</span></h1>
+            <p class="text-lg md:text-xl mb-8 text-slate-300 font-medium">Tổng kho phân phối sỉ & lẻ Cát, Đá, Xi Măng, Sắt Thép chính hãng</p>
+            <a href="#contact" class="bg-orange-500 text-white px-8 py-3.5 rounded-full text-lg font-bold shadow-lg shadow-orange-500/40 hover:bg-orange-600 transition-all transform hover:-translate-y-1 inline-flex items-center gap-2">
+                <i class="fa-solid fa-phone-volume"></i> HOTLINE: 0938.331.789
+            </a>
         </div>
     </section>
 
-    <!-- Khu vực Bảng Giá (Dành cho Admin cập nhật hàng ngày) -->
-    <section id="products" class="py-16 bg-white">
+    <!-- Khu vực Bảng Giá -->
+    <section id="products" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-blue-900 text-center uppercase mb-10">Bảng Giá Bán Lẻ Tham Khảo</h2>
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-blue-600 font-bold tracking-wider text-sm uppercase">Cập nhật liên tục mỗi ngày</span>
+                <h2 class="text-3xl md:text-4xl font-black text-blue-900 uppercase mt-1 mb-3">Bảng Giá Bán Lẻ Tham Khảo</h2>
+                <div class="w-20 h-1 bg-orange-500 mx-auto rounded-full"></div>
+            </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Sản phẩm 1 -->
-                <div class="border rounded-xl p-4 shadow hover:shadow-lg bg-gray-50">
-                    <img src="https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?w=400" alt="Cát" class="w-full h-40 object-cover rounded mb-4">
-                    <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-2">Cát Xây Dựng</h3>
-                    <ul class="space-y-2 text-gray-700 font-medium">
-                        <li class="flex justify-between"><span>Cát san lấp:</span> <span class="text-red-600 font-bold">150.000đ / m3</span></li>
-                        <li class="flex justify-between"><span>Cát xây tô:</span> <span class="text-red-600 font-bold">220.000đ / m3</span></li>
-                        <li class="flex justify-between"><span>Cát bê tông:</span> <span class="text-red-600 font-bold">350.000đ / m3</span></li>
-                    </ul>
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:border-orange-400/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="overflow-hidden rounded-xl mb-4 relative">
+                            <div class="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1590486803833-1c5dc8ddd4c8?w=400" alt="Cát" class="w-full h-44 object-cover rounded-xl group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 z-20 bg-blue-900 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Vật liệu thô</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-blue-900 border-b border-slate-100 pb-3 mb-3 flex items-center justify-between">
+                            <span>Cát Xây Dựng</span>
+                            <i class="fa-solid fa-layer-group text-orange-500 text-sm"></i>
+                        </h3>
+                        <ul class="space-y-3 text-slate-600 font-medium text-sm">
+                            <li class="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg"><span>Cát san lấp:</span> <span class="text-orange-600 font-bold">150.000đ / m3</span></li>
+                            <li class="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg"><span>Cát xây tô:</span> <span class="text-orange-600 font-bold">220.000đ / m3</span></li>
+                            <li class="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg"><span>Cát bê tông:</span> <span class="text-orange-600 font-bold">350.000đ / m3</span></li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="mt-5 block w-full text-center bg-blue-50 text-blue-900 hover:bg-orange-500 hover:text-white font-bold py-2 rounded-xl transition-colors text-sm">Chọn mua</a>
                 </div>
 
                 <!-- Sản phẩm 2 -->
-                <div class="border rounded-xl p-4 shadow hover:shadow-lg bg-gray-50">
-                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400" alt="Đá" class="w-full h-40 object-cover rounded mb-4">
-                    <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-2">Đá Xây Dựng</h3>
-                    <ul class="space-y-2 text-gray-700 font-medium">
-                        <li class="flex justify-between"><span>Đá 1x2 đen:</span> <span class="text-red-600 font-bold">280.000đ / m3</span></li>
-                        <li class="flex justify-between"><span>Đá 1x2 xanh:</span> <span class="text-red-600 font-bold">380.000đ / m3</span></li>
-                        <li class="flex justify-between"><span>Đá 4x6:</span> <span class="text-red-600 font-bold">250.000đ / m3</span></li>
-                    </ul>
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:border-orange-400/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="overflow-hidden rounded-xl mb-4 relative">
+                            <div class="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400" alt="Đá" class="w-full h-44 object-cover rounded-xl group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 z-20 bg-blue-900 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Vật liệu thô</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-blue-900 border-b border-slate-100 pb-3 mb-3 flex items-center justify-between">
+                            <span>Đá Xây Dựng</span>
+                            <i class="fa-solid fa-gem text-orange-500 text-sm"></i>
+                        </h3>
+                        <ul class="space-y-3 text-slate-600 font-medium text-sm">
+                            <li class="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg"><span>Đá 1x2 đen:</span> <span class="text-orange-600 font-bold">280.000đ / m3</span></li>
+                            <li class="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg"><span>Đá 1x2 xanh:</span> <span class="text-orange-600 font-bold">380.000đ / m3</span></li>
+                            <li class="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg"><span>Đá 4x6:</span> <span class="text-orange-600 font-bold">250.000đ / m3</span></li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="mt-5 block w-full text-center bg-blue-50 text-blue-900 hover:bg-orange-500 hover:text-white font-bold py-2 rounded-xl transition-colors text-sm">Chọn mua</a>
                 </div>
 
                 <!-- Sản phẩm 3 -->
-                <div class="border rounded-xl p-4 shadow hover:shadow-lg bg-gray-50">
-                    <img src="https://images.unsplash.com/photo-1621644788172-114400ea01c8?w=400" alt="Xi măng" class="w-full h-40 object-cover rounded mb-4">
-                    <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-2">Xi Măng</h3>
-                    <ul class="space-y-2 text-gray-700 font-medium">
-                        <li class="flex justify-between"><span>Hà Tiên 1:</span> <span class="text-red-600 font-bold">89.000đ / Bao</span></li>
-                        <li class="flex justify-between"><span>Vicem:</span> <span class="text-red-600 font-bold">85.000đ / Bao</span></li>
-                        <li class="flex justify-between"><span>Insee:</span> <span class="text-red-600 font-bold">92.000đ / Bao</span></li>
-                    </ul>
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:border-orange-400/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="overflow-hidden rounded-xl mb-4 relative">
+                            <div class="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1621644788172-114400ea01c8?w=400" alt="Xi măng" class="w-full h-44 object-cover rounded-xl group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 z-20 bg-blue-900 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Liên kết</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-blue-900 border-b border-slate-100 pb-3 mb-3 flex items-center justify-between">
+                            <span>Xi Măng</span>
+                            <i class="fa-solid fa-cube text-orange-500 text-sm"></i>
+                        </h3>
+                        <ul class="space-y-3 text-slate-600 font-medium text-sm">
+                            <li class="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg"><span>Hà Tiên 1:</span> <span class="text-orange-600 font-bold">89.000đ / Bao</span></li>
+                            <li class="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg"><span>Vicem:</span> <span class="text-orange-600 font-bold">85.000đ / Bao</span></li>
+                            <li class="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg"><span>Insee:</span> <span class="text-orange-600 font-bold">92.000đ / Bao</span></li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="mt-5 block w-full text-center bg-blue-50 text-blue-900 hover:bg-orange-500 hover:text-white font-bold py-2 rounded-xl transition-colors text-sm">Chọn mua</a>
                 </div>
 
                 <!-- Sản phẩm 4 -->
-                <div class="border rounded-xl p-4 shadow hover:shadow-lg bg-gray-50">
-                    <img src="https://images.unsplash.com/photo-1518177579173-fb6b1104e76a?w=400" alt="Sắt thép" class="w-full h-40 object-cover rounded mb-4">
-                    <h3 class="text-xl font-bold text-blue-900 border-b pb-2 mb-2">Sắt Thép (Hòa Phát)</h3>
-                    <ul class="space-y-2 text-gray-700 font-medium">
-                        <li class="flex justify-between"><span>Thép cuộn Phi 6:</span> <span class="text-red-600 font-bold">14.500đ / kg</span></li>
-                        <li class="flex justify-between"><span>Thép cây Phi 10:</span> <span class="text-red-600 font-bold">95.000đ / Cây</span></li>
-                        <li class="flex justify-between"><span>Thép cây Phi 16:</span> <span class="text-red-600 font-bold">245.000đ / Cây</span></li>
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:border-orange-400/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="overflow-hidden rounded-xl mb-4 relative">
+                            <div class="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1518177579173-fb6b1104e76a?w=400" alt="Sắt thép" class="w-full h-44 object-cover rounded-xl group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 z-20 bg-blue-900 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Kết cấu</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-blue-900 border-b border-slate-100 pb-3 mb-3 flex items-center justify-between">
+                            <span>Sắt Thép (Hòa Phát)</span>
+                            <i class="fa-solid fa-bars text-orange-500 text-sm"></i>
+                        </h3>
+                        <ul class="space-y-3 text-slate-600 font-medium text-sm">
+                            <li class="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg"><span>Thép cuộn Phi 6:</span> <span class="text-orange-600 font-bold">14.500đ / kg</span></li>
+                            <li class="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg"><span>Thép cây Phi 10:</span> <span class="text-orange-600 font-bold">95.000đ / Cây</span></li>
+                            <li class="flex justify-between items-center bg-slate-50 px-3 py-2 rounded-lg"><span>Thép cây Phi 16:</span> <span class="text-orange-600 font-bold">245.000đ / Cây</span></li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="mt-5 block w-full text-center bg-blue-50 text-blue-900 hover:bg-orange-500 hover:text-white font-bold py-2 rounded-xl transition-colors text-sm">Chọn mua</a>
+                </div>
+            </div>
+
+            <div class="mt-10 bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-xl max-w-3xl mx-auto">
+                <p class="text-center text-sm text-slate-600 font-medium">
+                    <i class="fa-solid fa-circle-exclamation text-orange-500 mr-2"></i>* Lưu ý: Giá trên chỉ mang tính chất tham khảo và có thể thay đổi theo thời điểm. Vui lòng liên hệ để có giá chính xác nhất.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Khu vực Đặt hàng -->
+    <section id="contact" class="py-20 bg-slate-100 border-t border-slate-200">
+        <div class="container mx-auto px-4 max-w-4xl bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-slate-200">
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <h2 class="text-3xl md:text-4xl font-black text-blue-900 mb-3 uppercase">Gửi Yêu Cầu Báo Giá / Đặt Hàng</h2>
+                <p class="text-slate-600 font-medium">Điền thông tin vật tư bạn cần, Song Thịnh sẽ gọi lại báo giá tổng ngay lập tức.</p>
+                <div class="w-16 h-1 bg-orange-500 mx-auto rounded-full mt-4"></div>
+            </div>
+            
+            <div class="w-full overflow-hidden flex justify-center bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe59WOn2NO-ey4Sr9_6c4PMDbORdgJjwDGfxZc4j7HCog2Cqw/viewform?embedded=true" width="640" height="1777" frameborder="0" marginheight="0" marginwidth="0" class="rounded-xl">Đang tải…</iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chân trang (Footer) -->
+    <footer class="bg-blue-950 text-white pt-16 pb-8 border-t-4 border-orange-500">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
+                <!-- Cột 1: Thông tin thương hiệu -->
+                <div>
+                    <a href="#" class="text-2xl font-black text-orange-400 flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-helmet-safety text-orange-500"></i> SONG THỊNH
+                    </a>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                        Đơn vị chuyên cung cấp và phân phối sỉ, lẻ các loại vật liệu xây dựng hàng đầu. Cam kết chất lượng, đúng hẹn, giá cả cạnh tranh cho mọi công trình.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-10 h-10 rounded-full bg-blue-900 border border-blue-800 flex items-center justify-center text-orange-400 hover:bg-orange-500 hover:text-white transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-blue-900 border border-blue-800 flex items-center justify-center text-orange-400 hover:bg-orange-500 hover:text-white transition-colors"><i class="fa-brands fa-zalo"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-blue-900 border border-blue-800 flex items-center justify-center text-orange-400 hover:bg-orange-500 hover:text-white transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Cột 2: Thông tin doanh nghiệp (Yêu cầu đề bài) -->
+                <div>
+                    <h3 class="text-lg font-bold text-orange-400 uppercase border-b border-blue-900 pb-3 mb-4 tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-building text-sm"></i> Thông Tin Doanh Nghiệp
+                    </h3>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="leading-relaxed">
+                            <strong class="text-white block font-semibold mb-0.5">Tên quốc tế:</strong>
+                            CÔNG TY TNHH THƯƠNG MẠI VẬT LIỆU XÂY DỰNG SONG THỊNH
+                        </li>
+                        <li class="leading-relaxed">
+                            <strong class="text-white block font-semibold mb-0.5">Tên viết tắt:</strong>
+                            CÔNG TY TNHH THƯƠNG MẠI VẬT LIỆU XÂY DỰNG SONG THỊNH
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <strong class="text-white font-semibold">Mã số thuế:</strong>
+                            <span class="bg-blue-900 px-2 py-0.5 rounded text-orange-300 font-mono font-bold">0315260724</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <strong class="text-white font-semibold">Ngày cấp:</strong>
+                            <span class="text-slate-300">12/09/2018</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Cột 3: Liên kết nhanh & Hỗ trợ -->
+                <div>
+                    <h3 class="text-lg font-bold text-orange-400 uppercase border-b border-blue-900 pb-3 mb-4 tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-headset text-sm"></i> Hỗ Trợ & Liên Hệ
+                    </h3>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-orange-500 mt-1"></i>
+                            <span>Tổng kho phân phối VLXD Song Thịnh, TP. Hồ Chí Minh</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone-volume text-orange-500"></i>
+                            <span class="font-bold text-white">Hotline: 0938.331.789</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-orange-500"></i>
+                            <span>vlxdsongthinh@gmail.com</span>
+                        </li>
                     </ul>
                 </div>
             </div>
-            <p class="text-center text-sm text-gray-500 mt-6">* Lưu ý: Giá trên chỉ mang tính chất tham khảo và có thể thay đổi theo thời điểm. Vui lòng liên hệ để có giá chính xác nhất.</p>
-        </div>
-    </section>
 
-    <!-- Khu vực Đặt hàng (Form Google sẽ nằm ở đây) -->
-    <section id="contact" class="py-16 bg-blue-50">
-        <div class="container mx-auto px-4 max-w-4xl bg-white p-8 rounded-xl shadow-lg text-center">
-            <h2 class="text-3xl font-bold text-blue-900 mb-2 uppercase">Gửi Yêu Cầu Báo Giá / Đặt Hàng</h2>
-            <p class="text-gray-600 mb-6">Điền thông tin vật tư bạn cần, Song Thịnh sẽ gọi lại báo giá tổng ngay lập tức.</p>
-            
-            <div class="w-full overflow-hidden flex justify-center">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe59WOn2NO-ey4Sr9_6c4PMDbORdgJjwDGfxZc4j7HCog2Cqw/viewform?embedded=true" width="640" height="1777" frameborder="0" marginheight="0" marginwidth="0">Đang tải…</iframe>
+            <!-- Dòng bản quyền -->
+            <div class="border-t border-blue-900/80 pt-6 text-center text-xs text-slate-400 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>&copy; 2018 - 2026 CÔNG TY TNHH TM VLXD SONG THỊNH. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-orange-400 transition-colors">Chính sách bảo mật</a>
+                    <a href="#" class="hover:text-orange-400 transition-colors">Điều khoản sử dụng</a>
+                </div>
             </div>
-            
         </div>
-    </section>
+    </footer>
 
     <!-- Liên hệ nổi -->
-    <div class="fixed bottom-6 right-6 flex flex-col gap-4 z-50">
-        <a href="https://zalo.me/0909xxxxxx" target="_blank" class="bg-blue-500 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg font-bold text-xs">ZALO</a>
-        <a href="tel:0909xxxxxx" class="bg-green-500 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg text-xl"><i class="fa-solid fa-phone"></i></a>
+    <div class="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+        <a href="https://zalo.me/0909xxxxxx" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg shadow-blue-600/40 font-bold text-xs transition-transform hover:scale-110">ZALO</a>
+        <a href="tel:0909xxxxxx" class="bg-orange-500 hover:bg-orange-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg shadow-orange-500/40 text-xl transition-transform hover:scale-110"><i class="fa-solid fa-phone"></i></a>
     </div>
 
-    <!-- ================= CHỐNG SAO CHÉP CƠ BẢN (thêm mới) =================
-         Lưu ý: đây chỉ là "cản trở" người dùng phổ thông, không phải bảo mật thật sự,
-         vì mã nguồn HTML luôn được trình duyệt tải về và ai rành kỹ thuật vẫn xem được. -->
+    <!-- ================= CHỐNG SAO CHÉP CƠ BẢN ================= -->
     <script>
         // Chặn chuột phải
         document.addEventListener('contextmenu', e => e.preventDefault());
@@ -141,7 +269,7 @@
             }
         });
 
-        // Chặn bôi đen / copy nội dung văn bản (tuỳ chọn - có thể xoá nếu ảnh hưởng trải nghiệm khách xem giá)
+        // Chặn bôi đen / copy nội dung văn bản
         document.addEventListener('selectstart', e => e.preventDefault());
         document.addEventListener('copy', e => e.preventDefault());
     </script>
