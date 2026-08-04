@@ -1,54 +1,9 @@
-
-Claude finished the response
-
-<!DOCTYPE html> <html lang="vi" class="scroll-smooth"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>VLXD Song Thịnh | Phân Phối Cát, Đá, Xi Măng, Sắt Thép</title> <script src="https://cdn.tailwindcss.com"></script> <l
-
-pasted
-
-tạo một code trên dòng code này để bảo vệ code gốc chống hack
-
-
-Cân nhắc các biện pháp bảo vệ client-side với giới hạn thực tế
-Cân nhắc các biện pháp bảo vệ client-side với giới hạn thực tế
-Mình có thể thêm vài lớp bảo vệ cơ bản cho trang, nhưng cần nói rõ trước: HTML/CSS/JS chạy phía trình duyệt thì luôn có thể xem được (nhấn Ctrl+U hoặc F12 là thấy hết) — không có cách nào giấu tuyệt đối mã nguồn client-side. Những gì mình thêm dưới đây chỉ là các biện pháp hạn chế sao chép dễ dàng và tăng an toàn thực sự (chống XSS, clickjacking...), không phải "ẩn code".
-
-Mình sẽ thêm:
-
-CSP (Content-Security-Policy) – chặn script lạ chèn vào (XSS thật sự hữu ích)
-X-Frame-Options / chống clickjacking qua CSP
-Chặn chuột phải, chặn phím tắt F12/Ctrl+U/Ctrl+Shift+I (chỉ mang tính cản người không rành, dân biết vẫn xem được qua Network tab hoặc DevTools mở sẵn)
-Vô hiệu hoá bôi đen/copy nội dung (tuỳ chọn)
-
-Ran 2 commands, created a file, read a file
-Ran 2 commands, created a file, read a file
-Đã thêm gì:
-
-CSP (Content-Security-Policy) – bảo mật thật, chặn script lạ chèn vào trang (XSS) và chặn trang bị nhúng iframe trái phép (clickjacking).
-X-Content-Type-Options – chống trình duyệt "đoán sai" loại file, giảm rủi ro thực thi mã độc.
-Chặn chuột phải, F12, Ctrl+U, Ctrl+Shift+I/J/C, chặn bôi đen/copy — chỉ mang tính cản trở người dùng phổ thông, không ngăn được người có kỹ thuật (họ vẫn mở DevTools sẵn từ trước, dùng "View Frame Source", hoặc tải trực tiếp file qua Network tab).
-Lưu ý quan trọng:
-
-Muốn "bảo vệ" thật sự cần làm ở phía server, không phải HTML tĩnh: ví dụ chặn hotlink ảnh, giới hạn request, dùng HTTPS + HSTS, đặt header bảo mật ở server (Nginx/Apache) thay vì chỉ meta tag.
-Nếu web deploy tĩnh (GitHub Pages, Netlify, Vercel...), nên cấu hình header bảo mật ở file cấu hình của nền tảng đó (netlify.toml, vercel.json...) để CSP có hiệu lực đầy đủ hơn (meta tag không chặn được hết mọi thứ header thật làm được).
-Đoạn chặn copy/bôi đen có thể gây khó chịu cho khách vào xem bảng giá (họ không copy được số điện thoại, giá...) — nếu thấy phiền, có thể bỏ đoạn selectstart/copy mà vẫn giữ phần CSP.
-
-Index
-Code · HTML 
-
-
-
-
-
-Claude is AI and can make mistakes. Please double-check responses.
-
-
-Index · HTML
 <!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+
     <!-- ================= BẢO MẬT (thêm mới) ================= -->
     <!-- Content-Security-Policy: chỉ cho phép tải script/ảnh/font từ các nguồn tin cậy,
          chặn script độc hại bị chèn vào (XSS), chặn nhúng trang vào iframe của web khác (clickjacking) -->
@@ -65,13 +20,13 @@ Index · HTML
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="no-referrer-when-downgrade">
     <!-- ======================================================= -->
- 
+
     <title>VLXD Song Thịnh | Phân Phối Cát, Đá, Xi Măng, Sắt Thép</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="font-sans text-gray-800 antialiased bg-gray-50">
- 
+
     <!-- Header -->
     <header class="bg-blue-900 text-white shadow-lg fixed w-full z-50 top-0">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -84,7 +39,7 @@ Index · HTML
             </nav>
         </div>
     </header>
- 
+
     <!-- Banner -->
     <section class="pt-24 pb-12 flex items-center justify-center min-h-[60vh] bg-cover bg-center" style="background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1541888086925-0c13bb398e0c?w=1200');">
         <div class="text-center text-white px-4">
@@ -93,7 +48,7 @@ Index · HTML
             <a href="#contact" class="bg-blue-600 px-8 py-3 rounded-full text-lg font-bold hover:bg-blue-500">HOTLINE: 0909.XXX.XXX</a>
         </div>
     </section>
- 
+
     <!-- Khu vực Bảng Giá (Dành cho Admin cập nhật hàng ngày) -->
     <section id="products" class="py-16 bg-white">
         <div class="container mx-auto px-4">
@@ -110,7 +65,7 @@ Index · HTML
                         <li class="flex justify-between"><span>Cát bê tông:</span> <span class="text-red-600 font-bold">350.000đ / m3</span></li>
                     </ul>
                 </div>
- 
+
                 <!-- Sản phẩm 2 -->
                 <div class="border rounded-xl p-4 shadow hover:shadow-lg bg-gray-50">
                     <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400" alt="Đá" class="w-full h-40 object-cover rounded mb-4">
@@ -121,7 +76,7 @@ Index · HTML
                         <li class="flex justify-between"><span>Đá 4x6:</span> <span class="text-red-600 font-bold">250.000đ / m3</span></li>
                     </ul>
                 </div>
- 
+
                 <!-- Sản phẩm 3 -->
                 <div class="border rounded-xl p-4 shadow hover:shadow-lg bg-gray-50">
                     <img src="https://images.unsplash.com/photo-1621644788172-114400ea01c8?w=400" alt="Xi măng" class="w-full h-40 object-cover rounded mb-4">
@@ -132,7 +87,7 @@ Index · HTML
                         <li class="flex justify-between"><span>Insee:</span> <span class="text-red-600 font-bold">92.000đ / Bao</span></li>
                     </ul>
                 </div>
- 
+
                 <!-- Sản phẩm 4 -->
                 <div class="border rounded-xl p-4 shadow hover:shadow-lg bg-gray-50">
                     <img src="https://images.unsplash.com/photo-1518177579173-fb6b1104e76a?w=400" alt="Sắt thép" class="w-full h-40 object-cover rounded mb-4">
@@ -147,7 +102,7 @@ Index · HTML
             <p class="text-center text-sm text-gray-500 mt-6">* Lưu ý: Giá trên chỉ mang tính chất tham khảo và có thể thay đổi theo thời điểm. Vui lòng liên hệ để có giá chính xác nhất.</p>
         </div>
     </section>
- 
+
     <!-- Khu vực Đặt hàng (Form Google sẽ nằm ở đây) -->
     <section id="contact" class="py-16 bg-blue-50">
         <div class="container mx-auto px-4 max-w-4xl bg-white p-8 rounded-xl shadow-lg text-center">
@@ -160,20 +115,20 @@ Index · HTML
             
         </div>
     </section>
- 
+
     <!-- Liên hệ nổi -->
     <div class="fixed bottom-6 right-6 flex flex-col gap-4 z-50">
         <a href="https://zalo.me/0909xxxxxx" target="_blank" class="bg-blue-500 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg font-bold text-xs">ZALO</a>
         <a href="tel:0909xxxxxx" class="bg-green-500 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg text-xl"><i class="fa-solid fa-phone"></i></a>
     </div>
- 
+
     <!-- ================= CHỐNG SAO CHÉP CƠ BẢN (thêm mới) =================
          Lưu ý: đây chỉ là "cản trở" người dùng phổ thông, không phải bảo mật thật sự,
          vì mã nguồn HTML luôn được trình duyệt tải về và ai rành kỹ thuật vẫn xem được. -->
     <script>
         // Chặn chuột phải
         document.addEventListener('contextmenu', e => e.preventDefault());
- 
+
         // Chặn các phím tắt xem mã nguồn / mở DevTools
         document.addEventListener('keydown', e => {
             const key = e.key.toUpperCase();
@@ -185,13 +140,12 @@ Index · HTML
                 e.preventDefault();
             }
         });
- 
+
         // Chặn bôi đen / copy nội dung văn bản (tuỳ chọn - có thể xoá nếu ảnh hưởng trải nghiệm khách xem giá)
         document.addEventListener('selectstart', e => e.preventDefault());
         document.addEventListener('copy', e => e.preventDefault());
     </script>
     <!-- ======================================================================= -->
- 
+
 </body>
 </html>
- 
