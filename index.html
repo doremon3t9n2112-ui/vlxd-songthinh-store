@@ -252,6 +252,187 @@
         <a href="tel:0938331789" class="bg-orange-500 hover:bg-orange-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg shadow-orange-500/40 text-xl transition-transform hover:scale-110"><i class="fa-solid fa-phone"></i></a>
     </div>
 
+    <!-- ================= POP-UP XÁC MINH CON NGƯỜI (3 BƯỚC NÂNG CAO) ================= -->
+    <div id="humanVerifyModal" class="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/85 backdrop-blur-md p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6 md:p-8 border border-slate-100 relative animate-in fade-in zoom-in duration-300">
+            
+            <!-- Tiêu đề chung & Tiến trình bước -->
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center mx-auto mb-3 text-xl shadow-inner">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 class="text-2xl font-black text-blue-900 uppercase">Xác Minh Bảo Mật</h3>
+                <p class="text-slate-500 text-xs mt-1">Vui lòng hoàn thành 3 bước để xác thực bạn là con người.</p>
+                
+                <!-- Thanh tiến trình (Step Indicator) -->
+                <div class="flex items-center justify-center gap-2 mt-4">
+                    <div id="stepDot1" class="w-8 h-8 rounded-full bg-orange-500 text-white font-bold text-xs flex items-center justify-center shadow-md shadow-orange-500/30 transition-all">1</div>
+                    <div class="w-8 h-1 bg-slate-200 rounded" id="line1"></div>
+                    <div id="stepDot2" class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 font-bold text-xs flex items-center justify-center transition-all">2</div>
+                    <div class="w-8 h-1 bg-slate-200 rounded" id="line2"></div>
+                    <div id="stepDot3" class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 font-bold text-xs flex items-center justify-center transition-all">3</div>
+                </div>
+            </div>
+
+            <!-- BƯỚC 1: Chọn biểu tượng chính xác (Vật liệu xây dựng) -->
+            <div id="stepContent1" class="space-y-4">
+                <p class="text-sm font-bold text-blue-900 text-center">Bước 1: Chọn biểu tượng <span class="text-orange-500 font-extrabold">Cát / Vật liệu xây dựng</span></p>
+                <div class="grid grid-cols-3 gap-3">
+                    <button onclick="selectStep1(this, false)" class="h-20 bg-slate-50 border-2 border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1 hover:border-orange-500 transition-all group">
+                        <i class="fa-solid fa-car text-slate-400 text-xl group-hover:text-orange-500"></i>
+                        <span class="text-[10px] font-semibold text-slate-500">Xe hơi</span>
+                    </button>
+                    <button onclick="selectStep1(this, true)" id="correctBtn1" class="h-20 bg-slate-50 border-2 border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1 hover:border-orange-500 transition-all group">
+                        <i class="fa-solid fa-layer-group text-slate-400 text-xl group-hover:text-orange-500"></i>
+                        <span class="text-[10px] font-semibold text-slate-500">Cát VLXD</span>
+                    </button>
+                    <button onclick="selectStep1(this, false)" class="h-20 bg-slate-50 border-2 border-slate-200 rounded-xl flex flex-col items-center justify-center gap-1 hover:border-orange-500 transition-all group">
+                        <i class="fa-solid fa-tree text-slate-400 text-xl group-hover:text-orange-500"></i>
+                        <span class="text-[10px] font-semibold text-slate-500">Cây cối</span>
+                    </button>
+                </div>
+                <p id="errorMsg1" class="text-center text-xs text-red-500 font-semibold h-4"></p>
+            </div>
+
+            <!-- BƯỚC 2: Giải toán xác thực -->
+            <div id="stepContent2" class="space-y-4 hidden">
+                <p class="text-sm font-bold text-blue-900 text-center">Bước 2: Giải phép tính an toàn</p>
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-center">
+                    <span id="mathQuestion" class="text-lg font-black font-mono text-blue-900 tracking-wider"></span>
+                    <input type="number" id="mathAnswer" placeholder="Nhập đáp án" class="mt-3 w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-center font-bold text-slate-800 focus:outline-none focus:border-orange-500 transition-colors">
+                </div>
+                <button onclick="submitStep2()" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl shadow-lg shadow-orange-500/30 transition-all cursor-pointer">
+                    Tiếp Tục
+                </button>
+                <p id="errorMsg2" class="text-center text-xs text-red-500 font-semibold h-4"></p>
+            </div>
+
+            <!-- BƯỚC 3: Giữ nút xác nhận trong 2 giây hoặc bấm nhanh -->
+            <div id="stepContent3" class="space-y-4 hidden">
+                <p class="text-sm font-bold text-blue-900 text-center">Bước 3: Xác nhận hoàn tất</p>
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-center">
+                    <p class="text-xs text-slate-600 mb-3">Nhấn và giữ nút bên dưới trong 2 giây để xác thực cuối cùng.</p>
+                    <button id="holdVerifyBtn" onmousedown="startHold()" onmouseup="endHold()" ontouchstart="startHold()" ontouchend="endHold()" class="w-full bg-blue-900 text-white font-bold py-3.5 rounded-xl shadow-md transition-all select-none cursor-pointer relative overflow-hidden">
+                        <span id="holdText" class="relative z-10">Nhấn và giữ để xác nhận</span>
+                        <div id="holdProgress" class="absolute inset-0 bg-orange-500 w-0 transition-all duration-75"></div>
+                    </button>
+                </div>
+                <p id="errorMsg3" class="text-center text-xs text-red-500 font-semibold h-4"></p>
+            </div>
+            
+            <p class="text-[11px] text-slate-400 mt-6 text-center">Bảo mật đa lớp bởi Hệ thống Song Thịnh.</p>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let numA = 0;
+        let numB = 0;
+        let holdTimer = null;
+        let holdProgressInterval = null;
+        let holdDuration = 0;
+
+        // Khởi tạo phép tính cho bước 2 ngẫu nhiên
+        function initMath() {
+            numA = Math.floor(Math.random() * 10) + 1;
+            numB = Math.floor(Math.random() * 10) + 1;
+            document.getElementById('mathQuestion').innerText = `${numA} + ${numB} = ?`;
+        }
+        initMath();
+
+        // Xử lý Bước 1
+        function selectStep1(btn, isCorrect) {
+            const errorMsg = document.getElementById('errorMsg1');
+            if (isCorrect) {
+                errorMsg.innerText = '';
+                // Chuyển sang bước 2
+                document.getElementById('stepContent1').classList.add('hidden');
+                document.getElementById('stepContent2').classList.remove('hidden');
+                
+                // Cập nhật giao diện tiến trình
+                document.getElementById('stepDot1').className = 'w-8 h-8 rounded-full bg-green-500 text-white font-bold text-xs flex items-center justify-center';
+                document.getElementById('stepDot1').innerHTML = '<i class="fa-solid fa-check"></i>';
+                document.getElementById('line1').classList.remove('bg-slate-200');
+                document.getElementById('line1').classList.add('bg-green-500');
+                
+                document.getElementById('stepDot2').className = 'w-8 h-8 rounded-full bg-orange-500 text-white font-bold text-xs flex items-center justify-center shadow-md shadow-orange-500/30';
+                currentStep = 2;
+            } else {
+                errorMsg.innerText = 'Sai biểu tượng! Vui lòng chọn đúng biểu tượng cát/VLXD.';
+                btn.classList.add('border-red-500', 'bg-red-50');
+                setTimeout(() => {
+                    btn.classList.remove('border-red-500', 'bg-red-50');
+                }, 1000);
+            }
+        }
+
+        // Xử lý Bước 2
+        function submitStep2() {
+            const userAns = parseInt(document.getElementById('mathAnswer').value);
+            const errorMsg = document.getElementById('errorMsg2');
+            
+            if (userAns === (numA + numB)) {
+                errorMsg.innerText = '';
+                // Chuyển sang bước 3
+                document.getElementById('stepContent2').classList.add('hidden');
+                document.getElementById('stepContent3').classList.remove('hidden');
+                
+                // Cập nhật giao diện tiến trình
+                document.getElementById('stepDot2').className = 'w-8 h-8 rounded-full bg-green-500 text-white font-bold text-xs flex items-center justify-center';
+                document.getElementById('stepDot2').innerHTML = '<i class="fa-solid fa-check"></i>';
+                document.getElementById('line2').classList.remove('bg-slate-200');
+                document.getElementById('line2').classList.add('bg-green-500');
+                
+                document.getElementById('stepDot3').className = 'w-8 h-8 rounded-full bg-orange-500 text-white font-bold text-xs flex items-center justify-center shadow-md shadow-orange-500/30';
+                currentStep = 3;
+            } else {
+                errorMsg.innerText = 'Kết quả phép tính chưa chính xác. Vui lòng nhập lại!';
+            }
+        }
+
+        // Xử lý Bước 3 (Nhấn và giữ)
+        function startHold() {
+            holdDuration = 0;
+            const progressBar = document.getElementById('holdProgress');
+            const holdText = document.getElementById('holdText');
+            holdText.innerText = 'Đang xác thực...';
+
+            holdProgressInterval = setInterval(() => {
+                holdDuration += 20;
+                let percent = (holdDuration / 2000) * 100;
+                progressBar.style.width = percent + '%';
+
+                if (holdDuration >= 2000) {
+                    clearInterval(holdProgressInterval);
+                    successVerification();
+                }
+            }, 20);
+        }
+
+        function endHold() {
+            if (holdDuration < 2000) {
+                clearInterval(holdProgressInterval);
+                document.getElementById('holdProgress').style.width = '0%';
+                document.getElementById('holdText').innerText = 'Nhấn và giữ để xác nhận';
+                document.getElementById('errorMsg3').innerText = 'Bạn cần giữ đủ 2 giây!';
+            }
+        }
+
+        // Hoàn tất toàn bộ xác minh
+        function successVerification() {
+            document.getElementById('stepDot3').className = 'w-8 h-8 rounded-full bg-green-500 text-white font-bold text-xs flex items-center justify-center';
+            document.getElementById('stepDot3').innerHTML = '<i class="fa-solid fa-check"></i>';
+            
+            const modal = document.getElementById('humanVerifyModal');
+            modal.style.opacity = '0';
+            modal.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+                modal.remove();
+            }, 300);
+        }
+    </script>
+    <!-- ======================================================================= -->
+
     <!-- ================= CHỐNG SAO CHÉP CƠ BẢN ================= -->
     <script>
         // Chặn chuột phải
